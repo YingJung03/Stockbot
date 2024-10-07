@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}StockBot新聞消息{% endblock %}
+{% block main %}
+
+    
+    <div class="container title">
+        <h2>pic</h2>
+    </div>
+    <div id="graph-1" class="container wel">
+        <!-- Latest compiled and minified plotly.js JavaScript -->
+       <!-- Latest compiled and minified plotly.js JavaScript -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<!-- OR use a specific plotly.js release (e.g. version 1.5.0) -->
+<script src="https://cdn.plot.ly/plotly-1.5.0.min.js"></script>
+
+<!-- OR an un-minified version is also available -->
+<script src="https://cdn.plot.ly/plotly-latest.js" charset="utf-8"></script>
+        <script type="text/javascript">
+            
+            var graphs = {{ graphJSON| safe }};
+            
+            Plotly.plot("graph-1",
+                graphs.data,
+                graphs.layout || {});
+        </script>
+    </div>
+
+{% endblock %}

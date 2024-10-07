@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% block title %}StockBot個股資訊{% endblock %}
+    {% block main %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tab.css') }}">
+    <div class="container title">
+      {% for s in s_name %}
+        <h2> {{s[0]}} {{s[1]}}</h2>
+      {% endfor %}
+    </div>
+
+<div class="container wel" >
+      <h3>基本資訊</h3>
+  <hr class="my-4">
+  <table class="table table-bordered table-hover bg-a2"> 
+    <tbody>
+      <tr>
+      {% for i1 in i1%}
+        <th colspan="2">{{i1[3]}}年</th>
+      {%endfor%}
+      </tr>
+      <tr>
+        <th scope="col">殖利率(單位:%)</th>
+      {% for i1 in i1%}
+        <td>{{i1[1]}}</td>  
+      {%endfor%}        
+      </tr>
+      <tr>
+        <th scope="col">歷年股利</th>
+      {% for i1 in i1%}
+        <td >{{i1[0]}}</td>
+      {%endfor%} 
+      </tr>
+      <tr>
+        <th scope="row">EPS(單位:元)</th>
+      {% for i5 in i5 %}
+        <td>{{i5[0]}}</td>
+      {%endfor%}
+      </tr>
+      <tr>
+        <th scope="col">本益比</th>
+      {%for i2 in i2 %}
+        <td >{{i2[0]}}</td> 
+      {% endfor%}
+      </tr>
+      <tr>
+        <th scope="row">營收</th> 
+      {% for i4 in i4 %}
+        <td>{{i4[0]}}</td>
+      {%endfor%}
+      </tr>
+      <tr>
+        <th scope="row">淨值</th>
+      {% for i5 in i5 %}
+        <td>{{i5[1]}}</td>
+      {%endfor%}
+      </tr>
+      <tr>
+        <th scope="row">總市值(單位:百億)</th>
+      {% for i3 in i3 %}
+        <td> {{i3[0]}}</td>
+      {%endfor%}
+      </tr>
+      <tr>
+        <th scope="row">股本</th>
+      {% for i1 in i1 %}
+        <td> {{i1[2]}}</td>
+      {%endfor%}
+      </tr> 
+    </tbody>
+  </table>
+  <div class="container">
+    <button onclick="window.location.href='{{ url_for("info",id=id) }}'">查看歷年資料</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h3>財務</h3>
+    <hr class="my-4">
+      <div class="wrapper">
+        <div class="buttonWrapper">
+          <button class="tab-button active" style="border-top-left-radius: 10px;" data-id="home">損益表</button>
+          <button class="tab-button " data-id="about"> 資產負債表</button>
+          <button class="tab-button " style="border-top-right-radius: 10px;" data-id="contact">現金流量表</button>
+        </div>
+          <div class="content active" id="home" >
+            <table id = "table_id" class="table table-hover table-responsive">
+              <thead>
+                <tr>
+                  <th scope="col">年度</th>
+                  <th scope="col">營業收入</th>
+                  <th scope="col">營業成本</th>
+                  <th scope="col">營業毛利</th>
+                  <th scope="col">營業費用</th>
+                  <th scope="col">營業利益</th>
+                  <th scope="col">業外損益</th>
+                  <th scope="col">稅前淨利</th>
+                  <th scope="col">稅後淨利</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for i in income %}
+                  <tr>
+                    <td>{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                    <td>{{i[3]}}</td>
+                    <td>{{i[4]}}</td>
+                    <td>{{i[5]}}</td>
+                    <td>{{i[6]}}</td>
+                    <td>{{i[7]}}</td>
+                    <td>{{i[8]}}</td>
+                    <td>{{i[9]}}</td>
+                  </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="content" id="about">
+              <table id="table_id1" class="table table-hover table-responsive2">
+                <thead>
+                  <tr>
+                    <th scope="col">年度</th>
+                    <th scope="col">資產總額</th>
+                    <th scope="col">負債總額</th>
+                    <th scope="col">股東權益報酬</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for b in balance%}
+                  <tr>
+                    <td>{{b[1]}}</td>
+                    <td>{{b[2]}}</td>
+                    <td>{{b[3]}}</td>
+                    <td>{{b[4]}}</td>        
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+          </div>
+
+          <div class="content" id="contact">
+                  <table id = "table_id2" class="table table-hover table-responsive">
+                    <thead>
+                      <tr>
+                        <th scope="col">年度</th>
+                        <th scope="col">營業毛利率</th>
+                        <th scope="col">營業利益率</th>
+                        <th scope="col">稅後淨利率</th>
+                        <th scope="col">每股稅後盈餘 (元)</th>
+                        <th scope="col">每股淨值(元)</th>
+                        <th scope="col">股東權益報酬率(當季)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for f in finance %}
+                      <tr>
+                        <td>{{f[1]}}</td>
+                        <td>{{f[2]}}</td>
+                        <td>{{f[3]}}</td>
+                        <td>{{f[4]}}</td>
+                        <td>{{f[6]}}</td>
+                        <td>{{f[7]}}</td>
+                        <td>{{f[8]}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+          </div>
+      </div>
+  </div>
+  <br><br><br><br>
+  <div class="container">
+    <h3>籌碼</h3>
+      <hr class="my-4">
+      <table id="table_id3" class="table table-hover table-responsive2 " style="width:100%">
+          <thead>
+              <tr>
+                  <th>日期</th>
+                  <th>外資</th>
+                  <th>投信</th>
+                  <th>自營商</th>
+                  <th>融資</th>
+                  <th>融券</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for b in bargain %}
+            <tr>
+              <td>{{ b[1]}}</td>
+              <td>{{ b[2]}}</td>
+              <td>{{ b[3]}}</td>
+              <td>{{ b[4]}}</td>
+              <td>{{ b[5]}}</td>
+              <td>{{ b[6]}}</td>
+            </tr>
+          {% endfor %}
+          </tbody>    
+      </table>
+
+  </div>
+  <br><br><br><br>
+  
+  <div class="container">
+    <h3>技術分析</h3>
+<hr class="my-4">
+<div style="background-color:#bccbe9;padding:10px;margin-bottom:5px;height:20%;">
+  <form action="/picture" method="get" >
+<label><h4  ></h4>選擇圖表</label><br>
+<input type="hidden" name="id" value="{% for s in s_name %}{{s[0]}}{% endfor %}">
+<label><input type="checkbox" name="pics" value="price">&nbsp;股價</label><br>
+<label><input type="checkbox" name="pics" value="kd">&nbsp;KD</label><br>
+<label><input type="checkbox" name="pics" value="volume">&nbsp;成交量</label><br>
+<label><input type="checkbox" name="pics" value="macd">&nbsp;MACD</label><br>
+<label><input type="checkbox" name="pics" value="rsi">&nbsp;RSI</label><br>
+<br><br>
+<input type="hidden" name="picday" id="pic" value="2022-05-02">
+<input type="hidden" name="screen_width" id="screen_width">
+<script>
+  $().ready(()=>{
+    $('#screen_width').val($(window).width())
+  })
+</script>
+<button type="submit" name="submit" class="btn btn-secondary"  >確認</button>
+<br><br><br>
+
+</form>
+</div>
+</div>
+</div>   
+</div>
+<style>
+  table{
+      width:100%;
+  }
+  #example_filter{
+      float:right;
+  }
+  #example_paginate{
+      float:right;
+  }
+  label {
+      display: inline-flex;
+      margin-bottom: .5rem;
+      margin-top: .5rem;
+      
+  }
+  
+</style>
+<script>
+  function checkAll(bx) {
+    var cbs = document.getElementsByTagName('input');
+    for(var i=0; i < cbs.length; i++) {
+      if(cbs[i].type == 'checkbox') {
+        cbs[i].checked = bx.checked;
+      }
+    }
+  }
+</script>  
+
+<script type="text/javascript">
+  const tabs = document.querySelector(".wrapper");
+  const tabButton = document.querySelectorAll(".tab-button");
+  const contents = document.querySelectorAll(".content");
+ 
+  tabs.onclick = (e) => {
+      const id = e.target.dataset.id;
+  
+      if (id) {
+          tabButton.forEach((btn) => {
+            btn.classList.remove("active");
+       
+          
+          });
+          e.target.classList.add("active");
+      
+          contents.forEach((content) => {
+   
+            content.classList.remove("active");
+   
+          });
+          const element = document.getElementById(id);
+          element.classList.add("active");
+    
+        }  
+       
+   };
+</script>
+    {% endblock %}

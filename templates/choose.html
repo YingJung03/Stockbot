@@ -1,0 +1,712 @@
+{% extends "base.html" %}
+{% block title %}StockBot選股專區{% endblock %}
+    {% block main %}
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class = 'alert alert-warning'>
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+      </div>
+    {% endif %}
+    {% endwith %}
+    <div class="container">
+        <h2>選股專區</h2>
+    </div>
+    <div class="container">
+      <hr class="my-4">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item2">
+              <h1 class="accordion-header" id="flush-headingOne">
+                <button style="font-size : 25px" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" style="font-size : 15px;">
+                  大師選股
+                </button>
+              </h1>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <br>
+              <div class="card" style="width:100%;">
+                <div class="card-body">
+                  <h4 class="card-title">彼得林區</h4>
+                  <p>1.	本益比小於20</p>
+                  <p>2.	近2年營收成長率，平均大於25%</p>
+                  <p>3.	近5年稅前淨利成長率，平均大於7%</p>
+                  <p>4.	最近一季負債比例小於30%</p>
+                  <p>過濾股價5元以下,五日均量在500張以下的個股</p>
+                  <a href="{{url_for('master', master='pe')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">查看</a>
+                </div>
+              </div>
+              <br>
+              <div class="card" style="width:100%;">
+                <div class="card-body">
+                  <h4 class="card-title">巴菲特</h4>
+                  <p>1.	近5年，每年的EPS都大於1元</p>
+                  <p>2.	近12個月每股營收大於1.5元</p>
+                  <p>3.	股價淨值比小於1.5</p>
+                  <p>4.	近4季股東權益報酬率大於5%</p>
+                  <p>5.	最近5年毛利率每年都大於10%</p>
+                  <p>過濾股價5元以下,五日均量在500張以下的個股</p>
+                  <a href="{{url_for('master', master='bu')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">查看</a>
+                </div>
+              </div>      
+              <br>
+              <div class="card" style="width:100%;">
+                <div class="card-body">
+                  <h4 class="card-title">麥克墨非</h4>
+                  <p>1. 近年營收成長率，平均大於15%</p>
+                  <p>2. 近4季股東權益報酬率大於7%</p>
+                  <p>3. 最新財報之營業利益率大於1%</p>
+                  <p>4. 近3年營益率每年都大於3%</p>
+                  <p>過濾股價5元以下,五日均量在500張以下的個股</p> 
+                  <a href="{{url_for('master', master='mm')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">查看</a>
+                </div>
+              </div>
+              </div>
+            </div>
+
+            <div class="accordion-item2">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button style="font-size : 25px" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo" style="font-size : 15px;">
+                自訂條件選股
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <br>
+                <div class="container-xl flex">
+                <div class="row">
+                  <div class="dual-list list-left col-md-6">
+                    <div class="well">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <div class="btn-group">
+                            <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i>全選</a>
+                          </div>
+                        </div>
+                        <div class="col-md-10">
+                          <h4 align="center">篩選條件</h4>
+                        </div>
+                       
+                      </div>
+                    <ul class="list-group">
+                      <li class="list-group-item"><div class="circle blue">
+                        <div class="text">基</div>
+                    </div>現金股利今年
+                        <select name="com" data-width="70px">
+                          <option value=">">大於</option>
+                          <option value="<">小於</option>
+                        </select>
+                        <select name="n" data-width="70px">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10"> 10</option>
+                        </select>
+                      </li>
+                      <li class="list-group-item"><div class="circle blue">
+                        <div class="text">基</div>
+                    </div>每股稅後盈餘 
+                        <select name="t2" data-width="70px">
+                          <option value="近1季">近1季</option> 
+                          <option value="近2季">近2季</option>
+                          <option value="近3季">近3季</option> 
+                          <option value="近1年">近1年</option>
+                          <option value="近2年">近2年</option>
+                          <option value="近3年">近3年</option>
+                          <option value="近4年">近4年</option>
+                        </select>
+                        <select name="com2" data-width="70px">
+                          <option value=">">大於</option>
+                          <option value="<">小於</option>
+                        </select>
+                        <select name="n2" data-width="70px">
+                          <option value="0">0</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                      </li>
+                      <li class="list-group-item"><div class="circle blue">
+                        <div class="text">基</div>
+                    </div>市值
+                        <select name="com3" data-width="70px">
+                          <option value=">">大於</option>
+                          <option value="<">小於</option>
+                        </select>
+                        <select name="n3" data-width="70px">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="5000">5000</option>
+                            <option value="10000">10000</option>
+                        </select>億</li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">基</div>
+                      </div>本益比
+                          <select name="com4" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n4" data-width="70px">
+                              <option value="5">5</option>
+                              <option value="10">10</option>
+                              <option value="15">15</option>
+                              <option value="20">20</option>
+                              <option value="25">25</option>
+                              <option value="30">30</option>
+                              <option value="35">35</option>
+                          </select>倍</li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>股東權益報酬
+                          <select name="t5" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                          </select>
+                          <select name="com5" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n5" data-width="70px">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="35">35</option>
+                            <option value="40">40</option>
+                          </select>%
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>資產報酬率
+                          <select name="t6" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                          </select>
+                          <select name="com6" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n6" data-width="70px">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="35">35</option>
+                            <option value="40">40</option>
+                          </select>%
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>毛利率
+                          <select name="t7" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近4季">近4季</option>
+                          </select>
+                          <select name="com7" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n7" data-width="70px">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                            <option value="60">60</option>
+                          </select>%
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>稅後淨利率
+                          <select name="t8" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                          </select>
+                          <select name="com8" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n8" data-width="70px">
+                            <option value="0">0</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                          </select>%
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>營業利益率
+                          <select name="t9" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                          </select>
+                          <select name="com9"  data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n9" data-width="70px">
+                            <option value="0">0</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                          </select>%
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>營收年成長率
+                          <select name="t10" data-width="70px">
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                            <option value="近6年">近6年</option>
+                            <option value="近7年">近7年</option>
+                            <option value="近8年">近8年</option>
+                          </select>
+                          <select name="com10" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n10" data-width="70px">
+                            <option value="0">0</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                          </select>%
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>毛利年成長率
+                          <select name="t11" data-width="70px">
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                            <option value="近6年">近6年</option>
+                            <option value="近7年">近7年</option>
+                            <option value="近8年">近8年</option>
+                          </select>
+                          <select name="com11" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n11" data-width="70px">
+                            <option value="0">0</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                          </select>%
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>存貨周轉率
+                          <select name="t12" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                          </select>
+                          <select name="com12" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n12" data-width="70px">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                          </select>次
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>應收帳款週轉率
+                          <select name="t13" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                          </select>
+                          <select name="com13" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n13" data-width="70px">
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                          </select>次
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>應付帳款周轉率
+                          <select name="t14" data-width="70px" >
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                          </select>
+                          <select name="com14" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n14" data-width="70px">
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                            <option value="8">8</option>
+                            <option value="10">10</option>
+                          </select>次
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>固定資產周轉率
+                          <select name="t15" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                          </select>
+                          <select name="com15" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n15" data-width="70px">
+                            <option value="0.5">0.5</option>
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option>
+                            <option value="3.5">3.5</option>
+                            <option value="4">4</option>
+                            <option value="4.5">4.5</option>
+                            <option value="5">5</option>
+                          </select>次
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>總資產周轉率
+                          <select name="t16" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近1年">近1年</option>
+                            <option value="近2年">近2年</option>
+                            <option value="近3年">近3年</option>
+                            <option value="近4年">近4年</option>
+                            <option value="近5年">近5年</option>
+                          </select>
+                          <select name="com16" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n16" data-width="70px">
+                            <option value="0.2">0.2</option>
+                            <option value="0.4">0.4</option>
+                            <option value="0.6">0.6</option>
+                            <option value="0.8">0.8</option>
+                            <option value="1">1</option>
+                          </select>次
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>流動比
+                          <select name="t17" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近4季">近4季</option>
+                          </select>
+                          <select name="com17" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n17" data-width="70px">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="150">150</option>
+                            <option value="200">200</option>
+                          </select>%
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>速動比 
+                          <select name="t18" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近4季">近4季</option>
+                          </select>
+                          <select name="com18" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n18" data-width="70px">
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="150">150</option>
+                            <option value="200">200</option>
+                          </select>%
+                        </li>
+                        <li class="list-group-item"><div class="circle blue">
+                          <div class="text">財</div>
+                      </div>現金流量比
+                          <select name="t19" data-width="70px">
+                            <option value="近1季">近1季</option>
+                            <option value="近2季">近2季</option>
+                            <option value="近3季">近3季</option>
+                            <option value="近4季">近4季</option>
+                          </select>
+                          <select name="com19" data-width="70px">
+                            <option value=">">大於</option>
+                            <option value="<">小於</option>
+                          </select>
+                          <select name="n19" data-width="70px">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                            <option value="60">60</option>
+                            <option value="70">70</option>
+                            <option value="80">80</option>
+                          </select>%
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+              
+                  <div class="list-arrows col-md-2 text-center">
+                    <button class="btn btn-default btn-sm move-right">
+                      加入<span class="glyphicon glyphicon-chevron-right"></span>
+                    </button><br>
+                    <button class="btn btn-default btn-sm move-left">
+                      <span class="glyphicon glyphicon-chevron-left"></span>清除
+                    </button>
+                  </div>
+              
+                  <div class="dual-list list-right col-md-6">
+                    <div class="well">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <div class="btn-group">
+                            <a class="btn btn-default selector" title="select all"><i class="glyphicon glyphicon-unchecked"></i>全選</a>
+                          </div>
+                        </div>
+                        <div class="col-md-8">
+                          <div class="input-group">
+                            <h4 align="center">選股條件</h4>
+                          </div>
+                        </div>
+                        
+                   
+                      </div>
+                      <form method="post" action="/choo">
+                      <ul class="list-group list-group1">
+                        <!--<li class="list-group-item">Cras justo odio</li>-->
+                      </ul>
+                      <div style=" display: flex; justify-content: center;">
+                        <button type="submit" class="btn" style="background-color: #7aaac4; color: white;">開始選股</button>
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+              
+                </div>
+              </div>
+              </div>
+            <div class="accordion-item2">
+              <h1 class="accordion-header" id="flush-headingThree">
+                <button style="font-size : 25px" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree" style="font-size : 15px;">
+                推薦選股
+                </button>
+              </h1>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                <br>
+              <div class="card" style="width:100%;">
+                <div class="card-body">
+                  <h4 class="card-title">綜合推薦</h4><br>
+                  <table class="table table-hover table-responsive">
+                    <thead>
+                      <tr>
+                        <th scope="col">股票號</th>
+                        <th scope="col">公司名</th>
+                        <th scope="col">產業</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for s in stock %}
+                        <tr>
+                          <td scope="row">{{ s[0]}}</td>
+                          <td>{{ s[1] }}</td>
+                          <td>{{ s[2] }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+              </div>
+              <br>
+              <div class="card" style="width:100%;">
+                <div class="card-body">
+                  <h4 class="card-title">產業推薦</h4><br>
+                  <a href="{{url_for('cc', cc='cement')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">水泥工業</a>
+                  <a href="{{url_for('cc', cc='food')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">食品工業</a>
+                  <a href="{{url_for('cc', cc='plastic')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">塑膠工業</a>
+                  <a href="{{url_for('cc', cc='rubber')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">橡膠工業</a>
+                  <a href="{{url_for('cc', cc='semi')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">半導體業</a>
+                  <a href="{{url_for('cc', cc='motor')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">電機機械</a>
+                  <a href="{{url_for('cc', cc='computer')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">電腦與週邊設備業</a>
+                  <a href="{{url_for('cc', cc='glance')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">電氣電纜</a>
+                  <a href="{{url_for('cc', cc='elec')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">電子零組件業</a>
+                  <a href="{{url_for('cc', cc='ec')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">電子通路業</a>
+                  <a href="{{url_for('cc', cc='eother')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">其他電子業</a>
+                  <a href="{{url_for('cc', cc='info')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">資訊服務業</a>
+                  <a href="{{url_for('cc', cc='opt')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">光電業</a>
+                  <a href="{{url_for('cc', cc='gas')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">油電燃氣業</a>
+                  <a href="{{url_for('cc', cc='steel')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">鋼鐵工業</a>
+                  <a href="{{url_for('cc', cc='building')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">建材營造業</a>
+                  <a href="{{url_for('cc', cc='chemical')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">化學工業</a>
+                  <a href="{{url_for('cc', cc='car')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">汽車工業</a>
+                  <a href="{{url_for('cc', cc='ship')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">航運業</a>
+                  <a href="{{url_for('cc', cc='bio')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">生技醫療業</a>
+                  <a href="{{url_for('cc', cc='paper')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">造紙工業</a>
+                  <a href="{{url_for('cc', cc='glass')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">玻璃陶瓷</a>
+                  <a href="{{url_for('cc', cc='tex')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">紡織纖維</a>
+                  <a href="{{url_for('cc', cc='trade')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">貿易百貨業</a>
+                  <a href="{{url_for('cc', cc='insurance')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">金融保險業</a>
+                  <a href="{{url_for('cc', cc='tour')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">觀光事業</a>
+                  <a href="{{url_for('cc', cc='com')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">通信網路業</a>
+                  <a href="{{url_for('cc', cc='other')}}" style="border:bolder; border-color:#94bfd6; color:#94bfd6" class="btn btn-lg active" role="button" aria-pressed="true">其他業</a>
+                </div>
+              </div>
+              <br>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+      $(function () {
+        $("body").on("click", ".list-group .list-group-item", function () {
+          $(this).toggleClass("active");
+        });
+        $(".list-arrows button").click(function () {
+          var $button = $(this),
+            actives = "";
+          if ($button.hasClass("move-left")) {
+            actives = $(".list-right ul li.active");
+            actives2=actives.clone().appendTo(".list-left ul").removeClass("active");
+            actives.remove();
+          } else if ($button.hasClass("move-right")) {
+            actives = $(".list-left ul li.active");
+            actives.clone().appendTo(".list-right ul").removeClass("active");
+            actives.remove();
+          }
+        });
+
+        $(".dual-list .selector").click(function () {
+          var $checkBox = $(this);
+          if (!$checkBox.hasClass("selected")) {
+            $checkBox
+              .addClass("selected")
+              .closest(".well")
+              .find("ul li:not(.active)")
+              .addClass("active");
+            $checkBox
+              .children("i")
+              .removeClass("glyphicon-unchecked")
+              .addClass("glyphicon-check");
+          } else {
+            $checkBox
+              .removeClass("selected")
+              .closest(".well")
+              .find("ul li.active")
+              .removeClass("active");
+            $checkBox
+              .children("i")
+              .removeClass("glyphicon-check")
+              .addClass("glyphicon-unchecked");
+          }
+        });
+      });
+      
+    </script>
+
+    {% endblock %}

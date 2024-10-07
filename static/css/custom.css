@@ -1,0 +1,27 @@
+.bg-a1{
+    background-color: #94bfd6;
+} 
+
+.bg-a1 .nav-item:active .nav-link,
+.bg-a1 .nav-item:hover .nav-link{
+  color: #ffffff;
+}
+
+.bg-a2{
+  background-color: #bccbe9;
+} 
+
+
+
+/* .desc {height: 20em;} */
+
+/* .title {
+  padding: 50px 50px 10px 50px;
+}
+.wel {
+  padding: 10px 60px 50px 60px;
+} */
+
+/* .n1 {
+  padding: 10px 10px 10px 10px;
+} */

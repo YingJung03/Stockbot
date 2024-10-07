@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}StockBot產業一覽{% endblock %}
+    {% block main %}
+
+    <style>
+      .accordion-button:not(.collapsed) {
+        color: #ffffff;
+        background-color: #94bfd6;
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        }
+        
+      td {
+          border-color: white;
+      }
+
+      a {text-decoration:none;}
+    </style>
+
+    <div class="container title">
+      <h2>光電業</h2>
+    </div>
+    <div class="container wel">
+      <select  style="float: right; width: 100px" onchange="javascript:handleSelect(this)" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <option selected>其他產業</option>
+        <option value="水泥工業">水泥工業</option>
+        <option value="食品工業">食品工業</option>
+        <option value="塑膠工業">塑膠工業</option>
+        <option value="橡膠工業">橡膠工業</option>
+        <option value="半導體業">半導體業</option>
+        <option value="電機機械">電機機械</option>
+        <option value="電腦及週邊設備業">電腦及週邊設備業</option>
+        <option value="電器電纜">電器電纜</option>
+        <option value="電子零組件業">電子零組件業</option>
+        <option value="電子通路業">電子通路業</option>
+        <option value="其他電子業">其他電子業</option>
+        <option value="資訊服務業">資訊服務業</option>
+        <option value="油電燃氣業">油電燃氣業</option>
+        <option value="鋼鐵工業">鋼鐵工業</option>
+        <option value="建材營造業">建材營造業</option>
+        <option value="化學工業">化學工業</option>
+        <option value="汽車工業">汽車工業</option>
+        <option value="航運業">航運業</option>
+        <option value="生技醫療業">生技醫療業</option>
+        <option value="造紙工業">造紙工業</option>
+        <option value="玻璃陶瓷">玻璃陶瓷</option>
+        <option value="紡織纖維">紡織纖維</option>
+        <option value="貿易百貨業">貿易百貨業</option>
+        <option value="金融保險業">金融保險業</option>
+        <option value="觀光事業">觀光事業</option>
+        <option value="通信網路業">通信網路業</option>
+        <option value="其他業">其他業</option>
+      </select>
+      <br>
+      <div>
+        <h5>無分游</h5>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=2323) }}" name='stock' id='2323' >2323	中環</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=2340) }}" name='stock' id='2340' >2340	台亞</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=2349) }}" name='stock' id='2349' > 2349	錸德</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=2393) }}" name='stock' id='2393' > 2393	億光</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=2406) }}" name='stock' id='2406' > 2406	國碩</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=2409) }}" name='stock' id='2409' > 2409	友達</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=2426) }}" name='stock' id='2426' > 2426	鼎元</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=2429) }}" name='stock' id='2429' > 2429	銘旺科</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=2438) }}" name='stock' id='2438' > 2438	翔耀</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=2466) }}" name='stock' id='2466' > 2466	冠西電</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=2486) }}" name='stock' id='2486' > 2486	一詮</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=2489) }}" name='stock' id='2489' > 2489	瑞軒</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=2491) }}" name='stock' id='2491' >2491	吉祥全</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=3008) }}" name='stock' id='3008' > 3008	大立光</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=3019) }}" name='stock' id='3019' > 3019	亞光</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=3024) }}" name='stock' id='3024' > 3024	憶聲</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=3031) }}" name='stock' id='3031' > 3031	佰鴻</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=3038) }}" name='stock' id='3038' > 3038	全台</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=3049) }}" name='stock' id='3049' >3049	和鑫</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=3050) }}" name='stock' id='3050' > 3050	鈺德</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=3051) }}" name='stock' id='3051' > 3051	力特</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=3059) }}" name='stock' id='3059' > 3059	華晶科</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=3149) }}" name='stock' id='3149' > 3149	正達</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=3356) }}" name='stock' id='3356' > 3356	奇偶</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=3383) }}" name='stock' id='3383' > 3383	新世紀</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=3406) }}" name='stock' id='3406' > 3406	玉晶光</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=3437) }}" name='stock' id='3437' > 3437	榮創</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=3454) }}" name='stock' id='3454' >3454	晶睿</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=3481) }}" name='stock' id='3481' > 3481	群創</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=3504) }}" name='stock' id='3504' > 3504	揚明光</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=3535) }}" name='stock' id='3535' > 3535	晶彩科</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=3543) }}" name='stock' id='3543' > 3543	州巧</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=3563) }}" name='stock' id='3563' > 3563	牧德</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=3576) }}" name='stock' id='3576' > 3576	聯合再生</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=3591) }}" name='stock' id='3591' >3591	艾笛森</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=3622) }}" name='stock' id='3622' >3622	洋華</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=3673) }}" name='stock' id='3673' > 3673	TPK-KY</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=3714) }}" name='stock' id='3714' >3714	富采</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=4934) }}" name='stock' id='4934' > 4934	太極</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=4935) }}" name='stock' id='4935' > 4935	茂林-KY</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=4942) }}" name='stock' id='4942' > 4942	嘉彰</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=4956) }}" name='stock' id='4956' > 4956	光鋐</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=4960) }}" name='stock' id='4960' > 4960	誠美材</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=4976) }}" name='stock' id='4976' > 4976	佳凌</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=5234) }}" name='stock' id='5234' > 5234	達興材料</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=5243) }}" name='stock' id='5243' > 5243	乙盛-KY</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=5244) }}" name='stock' id='5244' >5244	弘凱</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=5484) }}" name='stock' id='5484' > 5484	慧友</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=6116) }}" name='stock' id='6116' > 6116	彩晶</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=6120) }}" name='stock' id='6120' > 6120	達運</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=6164) }}" name='stock' id='6164' > 6164	華興</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=6168) }}" name='stock' id='6168' > 6168	宏齊</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=6176) }}" name='stock' id='6176' >6176	瑞儀</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=6209) }}" name='stock' id='6209' >6209	今國光</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=6225) }}" name='stock' id='6225' > 6225	天瀚</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=6226) }}" name='stock' id='6226' > 6226	光鼎</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=6278) }}" name='stock' id='6278' > 6278	台表科</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=6289) }}" name='stock' id='6289' > 6289	華上</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=6405) }}" name='stock' id='6405' > 6405	悅城</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=6431) }}" name='stock' id='6431' > 6431	光麗-KY</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=6443) }}" name='stock' id='6443' > 6443	元晶</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=6456) }}" name='stock' id='6456' >6456	GIS-KY</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=6477) }}" name='stock' id='6477' > 6477	安集</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=6668) }}" name='stock' id='6668' > 6668	中揚光</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=6706) }}" name='stock' id='6706' > 6706	惠特</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=8104) }}" name='stock' id='8104' > 8104	錸寶</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=8105) }}" name='stock' id='8105' > 8105	凌巨</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=8215) }}" name='stock' id='8215' > 8215	明基材</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <script type="text/javascript">
+      function handleSelect(elm)
+      {
+         window.location.href = "https://stockbottttt.herokuapp.com/" + elm.value;
+      }
+    </script>
+    {% endblock %}

@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}StockBot產業一覽{% endblock %}
+    {% block main %}
+    <style>
+      .accordion-button:not(.collapsed) {
+        color: #ffffff;
+        background-color: #94bfd6;
+        box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        }
+
+      td {
+          border-color: white;
+      }
+
+      a {text-decoration:none;}
+    </style>
+
+    <div class="container title">
+      <h2>水泥工業</h2>
+    </div>
+    <div class="container wel">
+    <select  style="float: right; width: 100px" onchange="javascript:handleSelect(this)" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+      <option selected>其他產業</option>
+      <option value="食品工業">食品工業</option>
+      <option value="塑膠工業">塑膠工業</option>
+      <option value="橡膠工業">橡膠工業</option>
+      <option value="半導體業">半導體業</option>
+      <option value="電機機械">電機機械</option>
+      <option value="電腦及週邊設備業">電腦及週邊設備業</option>
+      <option value="電器電纜">電器電纜</option>
+      <option value="電子零組件業">電子零組件業</option>
+      <option value="電子通路業">電子通路業</option>
+      <option value="其他電子業">其他電子業</option>
+      <option value="資訊服務業">資訊服務業</option>
+      <option value="光電業">光電業</option>
+      <option value="油電燃氣業">油電燃氣業</option>
+      <option value="鋼鐵工業">鋼鐵工業</option>
+      <option value="建材營造業">建材營造業</option>
+      <option value="化學工業">化學工業</option>
+      <option value="汽車工業">汽車工業</option>
+      <option value="航運業">航運業</option>
+      <option value="生技醫療業">生技醫療業</option>
+      <option value="造紙工業">造紙工業</option>
+      <option value="玻璃陶瓷">玻璃陶瓷</option>
+      <option value="紡織纖維">紡織纖維</option>
+      <option value="貿易百貨業">貿易百貨業</option>
+      <option value="金融保險業">金融保險業</option>
+      <option value="觀光事業">觀光事業</option>
+      <option value="通信網路業">通信網路業</option>
+      <option value="其他業">其他業</option>
+    </select>
+      <br>
+      <div>
+        <h5>上游</h5>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=1101) }}" name='stock' id='1101'>1101 台泥</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=1102) }}" name='stock' id='1102' >1102 亞泥</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=1103) }}" name='stock' id='1103' > 1103 嘉泥</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=1104) }}" name='stock' id='1104' >1104 環泥</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=1108) }}" name='stock' id='1108' >1108 幸福</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=1109) }}" name='stock' id='1109' >1109 信大</a></td>
+            </tr><tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=1110) }}" name='stock' id='1110' >1110 東泥</a></td>
+              <td style="width:34%"></td>
+              <td style="width:33%"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br><br>
+      <div>
+        <h5>中游</h5>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=1101) }}" name='stock' id='1101'>1101 台泥</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=1104) }}" name='stock' id='1104' >1104 環泥</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=1108) }}" name='stock' id='1108' >1108 幸福</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=1109) }}" name='stock' id='1109' >1109 信大</a></td>
+              <td style="width:34%"></td>
+              <td style="width:33%"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br><br>
+      <div>
+        <h5>下游</h5>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=1101) }}" name='stock' id='1101'>1101 台泥</a></td>
+              <td style="width:34%"><a href="{{ url_for('income', id=1104) }}" name='stock' id='1104' >1104 環泥</a></td>
+              <td style="width:33%"><a href="{{ url_for('income', id=1108) }}" name='stock' id='1108' >1108 幸福</a></td>
+            </tr>
+            <tr>
+              <td style="width:33%"><a href="{{ url_for('income', id=1109) }}" name='stock' id='1109' >1109 信大</a></td>
+              <td style="width:34%"></td>
+              <td style="width:33%"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function handleSelect(elm)
+      {
+         window.location.href = "https://stockbottttt.herokuapp.com/" + elm.value;
+      }
+    </script>
+    {% endblock %}

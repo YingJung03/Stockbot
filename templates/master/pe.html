@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}StockBot大師選股{% endblock %}
+    {% block main %}
+    <div class="container title">
+        <h2>彼得林區</h2>
+    </div>
+    <div class="container wel">
+        <div class="card" style="width:100%;">
+            <div class="card-body">
+                <table class="table table-hover table-responsive">
+                    <thead>
+                      <tr>
+                        <th scope="col">股票號</th>
+                        <th scope="col">公司名</th>
+                        <th scope="col">產業</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for p in pe %}
+                        <tr>
+                          <th scope="row">{{ p[0]}}</th>
+                          <th>{{ p[1] }}</th>
+                          <th>{{ p[2] }}</th>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
